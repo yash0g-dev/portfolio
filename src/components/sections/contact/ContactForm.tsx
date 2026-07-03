@@ -37,7 +37,7 @@ const socialLinks = [
     title: "Email",
     user: "yashgupta",
     icon: FaEnvelope,
-    link: "mailto:yashgupta10094@gmail.com",
+    link: "mailto:yashg.dev03@gmail.com",
   },
   {
     title: "Phone",
@@ -172,7 +172,7 @@ export default function ContactForm() {
             </motion.p>
 
             <motion.a
-              href="https://www.linkedin.com/in/yash-gupta-b98b62256"
+              href="https://www.linkedin.com/in/yash-gupta-154005246/"
               target="_blank"
               rel="noopener noreferrer"
               variants={fieldVariants}
@@ -191,7 +191,7 @@ export default function ContactForm() {
                 <div>
                   <p className="text-sm font-semibold">LinkedIn</p>
                   <p className="text-xs text-white/40 truncate max-w-[200px] sm:max-w-none mt-0.5">
-                    yash-gupta-b98b62256{" "}
+                    yash-gupta-154005246
                   </p>
                 </div>
               </div>

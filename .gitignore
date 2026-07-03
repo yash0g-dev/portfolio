@@ -1,6 +1,6 @@
-.next
 node_modules
-public
 .env
+.env.local
 backup.sql	
+.next
 

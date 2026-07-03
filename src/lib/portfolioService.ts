@@ -35,4 +35,3 @@ export const fetchTechStacks = async () => {
 
   return data || [];
 };
-

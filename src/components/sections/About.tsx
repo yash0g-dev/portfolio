@@ -24,13 +24,13 @@ const socialLinks = [
     title: "LinkedIn",
     user: "yash0g-dev",
     icon: FaLinkedinIn,
-    link: "https://github.com/yash0g-dev",
+    link: "https://www.linkedin.com/in/yash-gupta-154005246/",
   },
   {
     title: "Email",
-    user: "himanshusharmazen",
+    user: "yashgupta",
     icon: FaEnvelope,
-    link: "mailto:yashgupta10094@gmail.com",
+    link: "mailto:yashg.dev03@gmail.com",
   },
   {
     title: "LeetCode",
@@ -435,7 +435,7 @@ export default function About() {
                 }}
               >
                 <img
-                  src="/assets/PP.png"
+                  src="https://jhhhnjbkemijochqmoop.supabase.co/storage/v1/object/public/certificates/yg1.jpeg"
                   alt="Profile"
                   style={{
                     width: 240,

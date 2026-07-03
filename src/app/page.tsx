@@ -13,7 +13,7 @@ import WelcomeScreen from "@/components/WelcomeScreen";
 import { hasPlayedIntro, setIntroPlayed } from "@/lib/introState";
 
 export default function Home() {
-  const [showWelcome, setShowWelcome] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
 
   useEffect(() => {
     const currentHash = window.location.hash;

@@ -5,31 +5,33 @@ import React, { useEffect, useRef } from "react";
 const AnimatedBackground = () => {
   const blobRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  useEffect(() => {
+useEffect(() => {
     let requestId: number;
 
-    const handleScroll = () => {
-      const scroll = window.pageYOffset;
+    const animateBlobs = () => {
+      // Use window.scrollY (pageYOffset is deprecated)
+      const scroll = window.scrollY;
 
       blobRefs.current.forEach((blob, index) => {
         if (!blob) return;
 
         const xOffset = Math.sin(scroll / 120 + index * 0.6) * 100;
-
         const yOffset = Math.cos(scroll / 120 + index * 0.6) * 35;
 
         blob.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
-        blob.style.transition = "transform 1.2s ease-out";
+        // Note: You can remove the CSS transition in the JSX/style 
+        // since requestAnimationFrame is already handling the smoothing!
       });
 
-      requestId = requestAnimationFrame(handleScroll);
+      // Loop the animation safely
+      requestId = requestAnimationFrame(animateBlobs);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
+    // Start the loop once
+    animateBlobs();
 
+    // Cleanup when the component unmounts
     return () => {
-      window.removeEventListener("scroll", handleScroll);
       cancelAnimationFrame(requestId);
     };
   }, []);
