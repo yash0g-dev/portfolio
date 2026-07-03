@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Transition } from "framer-motion";
 import { Code2, User, Globe } from "lucide-react";
 
 export default function WelcomeScreen() {
   const icons = [Code2, User, Globe];
   const [isVisible, setIsVisible] = useState(true);
 
-  // DRY up the transition config since you use it everywhere
-  const customEase = { duration: 1.6, ease: [0.22, 1, 0.36, 1] };
+  // Added the Transition type here so TypeScript knows exactly what this is
+  const customEase: Transition = { duration: 1.6, ease: [0.22, 1, 0.36, 1] };
 
   useEffect(() => {
     // Unmount the screen after 4.5 seconds (gives animations time to finish)
