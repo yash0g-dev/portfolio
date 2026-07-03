@@ -7,7 +7,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState("about");
   const [mounted, setMounted] = useState(false);
 
   const [showNavbar, setShowNavbar] = useState(false);
@@ -23,6 +23,7 @@ export default function Navbar() {
       setScrolled(window.scrollY > 20);
 
       const sections = ["about", "portfolio", "contact"];
+      let currentSection = "about";
 
       for (const sectionId of sections) {
         const section = document.getElementById(sectionId);
@@ -30,25 +31,29 @@ export default function Navbar() {
 
         const rect = section.getBoundingClientRect();
 
-        if (rect.top <= 140 && rect.bottom >= 140) {
-          setActiveSection(sectionId);
-          break;
+        if (rect.top <= 250) {
+          currentSection = sectionId;
         }
       }
+
+      setActiveSection(currentSection);
     };
 
     handleResize();
     handleScroll();
 
+    // ADD THIS: Re-check the positions after 100ms to catch the About section rendering
+    const layoutShiftCatch = setTimeout(handleScroll, 100);
+
     window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
 
     return () => {
+      clearTimeout(layoutShiftCatch); // <-- Don't forget to clear it!
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
   useEffect(() => {
     const navbarPlayed = sessionStorage.getItem("navbarPlayed");
 
@@ -108,11 +113,10 @@ export default function Navbar() {
     };
 
     requestAnimationFrame(animation);
-    setOpen(false);
+    setOpen(false); // Close mobile menu after clicking
   };
 
   const navItems = [
-    // { label: "Home", id: "home" },
     { label: "About", id: "about" },
     { label: "Portfolio", id: "portfolio" },
     { label: "Contact", id: "contact" },
@@ -267,4 +271,3 @@ export default function Navbar() {
     </motion.nav>
   );
 }
-
