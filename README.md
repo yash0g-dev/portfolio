@@ -1,10 +1,10 @@
-# Himanshu Sharma | Personal Portfolio
+# Yash Gupta | Personal Portfolio
 
 A modern full-stack developer portfolio built with Next.js, TypeScript, Tailwind CSS, Framer Motion, and Supabase.
 
 Designed with a terminal-inspired cyber aesthetic, custom halftone portrait artwork, animated grid backgrounds, and smooth interactions to showcase projects, skills, certifications, and professional experience.
 
-<img width="2880" height="1620" alt="Screenshot (127)" src="https://github.com/user-attachments/assets/5e3bfa5f-347f-4b47-9e06-35dd9fe5bad2" />
+<img width="2880" height="1620" alt="Screenshot (127)" src="" />
 
 ## ✦ Features
 
@@ -40,8 +40,8 @@ Designed with a terminal-inspired cyber aesthetic, custom halftone portrait artw
 ### Clone the repository
 
 ```bash
-git clone https://github.com/Hey-Hades/himanshusharmazen.dev.git
-cd himanshusharmazen.dev
+git clone git@github.com:yash0g-dev/portfolio.git
+cd portfolio
 ```
 
 ### Install dependencies
@@ -71,9 +71,9 @@ http://localhost:3000
 
 ## 👨‍💻 About Me
 
-**Himanshu Sharma**
+**Yash Gupta** is a full-stack developer with a passion for building scalable and efficient web applications.
 
-Computer Engineering Undergraduate at IIIT Bhubaneswar with interests in:
+Computer Engineering Undergraduate at KIT Kanpur with interests in:
 
 * Full-Stack Development
 * Data Structures & Algorithms
@@ -95,14 +95,14 @@ Computer Engineering Undergraduate at IIIT Bhubaneswar with interests in:
 
 ## 📜 Certifications
 
-* Oracle Cloud Infrastructure (OCI) Generative AI Professional
-* Oracle Cloud Infrastructure Architect Associate
+* Software Engineer Certificate , HackerRank
+* SQL (Intermediate) Certificate, HackerRank
 
 ## 🔗 Links
 
-- Portfolio: https://himanshusharmazen-dev.vercel.app
-- GitHub: https://github.com/Hey-Hades
-- LinkedIn: https://www.linkedin.com/in/himanshu-sharma-b98b62256
+- Portfolio: 
+- GitHub:
+- LinkedIn:  
 
 ## 📄 License
 
