@@ -257,7 +257,8 @@ export default function About() {
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.color = "var(--text-primary)";
-                        e.currentTarget.style.borderColor = "var(--text-primary)";
+                        e.currentTarget.style.borderColor =
+                          "var(--text-primary)";
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.color = "var(--text-secondary)";
@@ -291,15 +292,14 @@ export default function About() {
                 maxWidth: isMobile ? "100%" : "490px",
               }}
             >
-              B.Tech Computer Science and Engineering student at KIT Kanpur
-              (2023–2027) with an 8.1 CGPA. Passionate about full-stack
-              development, backend engineering, and building scalable web
-              applications. Experienced in developing production-ready projects,
-              from responsive frontends to efficient APIs and real-time
-              features. Strong foundation in data structures, algorithms,
-              databases, and cloud technologies, with a continuous drive to
-              learn modern tech stacks, write clean and maintainable code, and
-              build reliable, high-performance software.
+              B.Tech CSE student at KIT Kanpur (2023–2027) with an 8.1 CGPA.
+              Passionate about full-stack development, backend engineering, and
+              building scalable web applications. Experienced in developing
+              production-ready projects, from responsive frontends to efficient
+              APIs and real-time features. Strong foundation in data structures,
+              algorithms, databases, and cloud technologies, with a continuous
+              drive to learn modern tech stacks, write clean and maintainable
+              code, and build reliable, high-performance software.
             </motion.p>
 
             {/* QUOTE */}
