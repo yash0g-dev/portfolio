@@ -37,7 +37,7 @@ const socialLinks = [
     title: "Email",
     user: "yashgupta",
     icon: FaEnvelope,
-    link: "mailto:yashg.dev03@gmail.com",
+    link: "mailto:yashgupta10094@gmail.com",
   },
   {
     title: "Phone",
@@ -342,4 +342,3 @@ export default function ContactForm() {
     </div>
   );
 }
-

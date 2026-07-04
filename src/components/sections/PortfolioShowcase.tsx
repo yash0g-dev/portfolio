@@ -1,45 +1,26 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import {
-  X,
-  ChevronDown,
-  ChevronUp,
-} from 'lucide-react'
-import usePortfolio from '@/hooks/usePortfolio'
-import PortfolioCard from './PortfolioCard'
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, ChevronDown, ChevronUp } from "lucide-react";
+import usePortfolio from "@/hooks/usePortfolio";
+import PortfolioCard from "./PortfolioCard";
 
-const smoothEase: [number, number, number, number] = [
-  0.22,
-  1,
-  0.36,
-  1,
-]
+const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export default function PortfolioShowcase() {
-  const {
-    projects,
-    certificates,
-    techStacks,
-    loading,
-  } = usePortfolio()
+  const { projects, certificates, techStacks, loading } = usePortfolio();
 
-  const [activeTab, setActiveTab] =
-    useState('projects')
+  const [activeTab, setActiveTab] = useState("projects");
 
-  const [previewOpen, setPreviewOpen] =
-    useState(false)
+  const [previewOpen, setPreviewOpen] = useState(false);
 
-  const [previewImage, setPreviewImage] =
-    useState('')
+  const [previewImage, setPreviewImage] = useState("");
 
-  const [showAllProjects, setShowAllProjects] =
-    useState(false)
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
-  const displayedProjects = showAllProjects
-    ? projects
-    : projects.slice(0, 3)
+  const displayedProjects = showAllProjects ? projects : projects.slice(0, 4);
+  console.log("displayedProjects", displayedProjects);
 
   return (
     <>
@@ -96,39 +77,35 @@ export default function PortfolioShowcase() {
           </h1>
 
           <p className="text-white/55 max-w-xl mx-auto text-sm md:text-base">
-            Explore my journey through projects,
-            certifications, and technical expertise.
+            Explore my journey through projects, certifications, and technical
+            expertise.
           </p>
         </motion.div>
 
         {/* TAB */}
         <div className="flex justify-center mb-10">
           <div className="w-full max-w-3xl rounded-full border border-white/10 bg-white/5 p-2 flex gap-2 backdrop-blur-xl">
-            {[
-              'projects',
-              'certificates',
-              'techstack',
-            ].map((tab) => (
+            {["projects", "certificates", "techstack"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => {
-                  setActiveTab(tab)
+                  setActiveTab(tab);
 
-                  if (tab !== 'projects') {
-                    setShowAllProjects(false)
+                  if (tab !== "projects") {
+                    setShowAllProjects(false);
                   }
                 }}
                 className={`flex-1 rounded-full py-3 text-sm transition-all duration-300 ${
                   activeTab === tab
-                    ? 'bg-white/10 text-white'
-                    : 'text-white/50 hover:text-white'
+                    ? "bg-white/10 text-white"
+                    : "text-white/50 hover:text-white"
                 }`}
               >
-                {tab === 'projects'
-                  ? 'Projects'
-                  : tab === 'certificates'
-                  ? 'Certificates'
-                  : 'Tech Stack'}
+                {tab === "projects"
+                  ? "Projects"
+                  : tab === "certificates"
+                    ? "Certificates"
+                    : "Tech Stack"}
               </button>
             ))}
           </div>
@@ -143,7 +120,7 @@ export default function PortfolioShowcase() {
             transition={{ duration: 0.45 }}
           >
             {/* PROJECTS */}
-            {activeTab === 'projects' && (
+            {activeTab === "projects" && (
               <div className="space-y-8">
                 <motion.div
                   layout
@@ -157,123 +134,107 @@ export default function PortfolioShowcase() {
                 >
                   <AnimatePresence mode="popLayout">
                     {!loading &&
-                      displayedProjects.map(
-                        (item, i) => (
-                          <motion.div
-                            key={item.id}
-                            layout="position"
-                            initial={{
-                              opacity: 0,
-                              y: 40,
-                              scale: 0.96,
-                            }}
-                            animate={{
-                              opacity: 1,
-                              y: 0,
-                              scale: 1,
-                            }}
-                            exit={{
-                              opacity: 0,
-                              y: -30,
-                              scale: 0.95,
-                            }}
-                            transition={{
-                              duration: 0.55,
-                              delay: i * 0.04,
-                              ease: smoothEase,
-                            }}
-                          >
-                            <PortfolioCard
-                              index={i}
-                              title={item.title}
-                              description={
-                                item.description
-                              }
-                              image={item.image_url}
-                              live_url={item.live_url}
-                              id={item.id}
-                            />
-                          </motion.div>
-                        )
-                      )}
+                      displayedProjects.map((item, i) => (
+                        <motion.div
+                          key={item.id}
+                          layout="position"
+                          initial={{
+                            opacity: 0,
+                            y: 40,
+                            scale: 0.96,
+                          }}
+                          animate={{
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                          }}
+                          exit={{
+                            opacity: 0,
+                            y: -30,
+                            scale: 0.95,
+                          }}
+                          transition={{
+                            duration: 0.55,
+                            delay: i * 0.04,
+                            ease: smoothEase,
+                          }}
+                        >
+                          <PortfolioCard
+                            index={i}
+                            title={item.title}
+                            description={item.description}
+                            image={item.image_url}
+                            github_url={item.github_url}
+                            live_url={item.live_url}
+                            id={item.id}
+                          />
+                        </motion.div>
+                      ))}
                   </AnimatePresence>
                 </motion.div>
 
                 {/* SEE MORE / LESS */}
-                {!loading &&
-                  projects.length > 3 && (
-                    <motion.div
+                {!loading && projects.length > 4 && (
+                  <motion.div
+                    layout
+                    transition={{
+                      duration: 0.6,
+                      ease: smoothEase,
+                    }}
+                    className="flex justify-center"
+                  >
+                    <motion.button
                       layout
-                      transition={{
-                        duration: 0.6,
-                        ease: smoothEase,
+                      whileHover={{
+                        scale: 1.04,
                       }}
-                      className="flex justify-center"
+                      whileTap={{
+                        scale: 0.97,
+                      }}
+                      onClick={() => setShowAllProjects(!showAllProjects)}
+                      className="px-6 py-3 rounded-full border border-white/10 bg-white/[0.05] backdrop-blur-xl text-sm text-white/75 hover:text-white transition flex items-center gap-2"
                     >
-                      <motion.button
-                        layout
-                        whileHover={{
-                          scale: 1.04,
-                        }}
-                        whileTap={{
-                          scale: 0.97,
-                        }}
-                        onClick={() =>
-                          setShowAllProjects(
-                            !showAllProjects
-                          )
-                        }
-                        className="px-6 py-3 rounded-full border border-white/10 bg-white/[0.05] backdrop-blur-xl text-sm text-white/75 hover:text-white transition flex items-center gap-2"
-                      >
-                        <AnimatePresence mode="wait">
-                          <motion.div
-                            key={
-                              showAllProjects
-                                ? 'less'
-                                : 'more'
-                            }
-                            initial={{
-                              opacity: 0,
-                              y: 8,
-                            }}
-                            animate={{
-                              opacity: 1,
-                              y: 0,
-                            }}
-                            exit={{
-                              opacity: 0,
-                              y: -8,
-                            }}
-                            transition={{
-                              duration: 0.25,
-                            }}
-                            className="flex items-center gap-2"
-                          >
-                            {showAllProjects ? (
-                              <>
-                                <ChevronUp
-                                  size={16}
-                                />
-                                See Less
-                              </>
-                            ) : (
-                              <>
-                                <ChevronDown
-                                  size={16}
-                                />
-                                See More
-                              </>
-                            )}
-                          </motion.div>
-                        </AnimatePresence>
-                      </motion.button>
-                    </motion.div>
-                  )}
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={showAllProjects ? "less" : "more"}
+                          initial={{
+                            opacity: 0,
+                            y: 8,
+                          }}
+                          animate={{
+                            opacity: 1,
+                            y: 0,
+                          }}
+                          exit={{
+                            opacity: 0,
+                            y: -8,
+                          }}
+                          transition={{
+                            duration: 0.25,
+                          }}
+                          className="flex items-center gap-2"
+                        >
+                          {showAllProjects ? (
+                            <>
+                              <ChevronUp size={16} />
+                              See Less
+                            </>
+                          ) : (
+                            <>
+                              <ChevronDown size={16} />
+                              See More
+                            </>
+                          )}
+                        </motion.div>
+                      </AnimatePresence>
+                    </motion.button>
+                  </motion.div>
+                )}
               </div>
             )}
 
             {/* CERTIFICATES */}
-            {activeTab === 'certificates' && (
+            {activeTab === "certificates" && (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-1">
                 {!loading &&
                   certificates.map((item, i) => (
@@ -282,7 +243,7 @@ export default function PortfolioShowcase() {
                       className="group cursor-pointer rounded-[26px] border border-white/10 bg-white/5 p-4 backdrop-blur-xl flex flex-col items-center"
                     >
                       {/* IMAGE */}
-                      <div 
+                      <div
                         onClick={() => {
                           setPreviewImage(item.image_url);
                           setPreviewOpen(true);
@@ -302,24 +263,23 @@ export default function PortfolioShowcase() {
 
                       {/* VERIFY BUTTON */}
                       {item.credential_url && (
-                        <a 
-                          href={item.credential_url} 
-                          target="_blank" 
+                        <a
+                          href={item.credential_url}
+                          target="_blank"
                           rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()} 
+                          onClick={(e) => e.stopPropagation()}
                           className="mt-3 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-[11px] text-white/70 hover:bg-white/10 hover:text-white hover:border-white/20 transition-all duration-300"
                         >
                           Verify Credential
                         </a>
                       )}
-                      
                     </motion.div>
                   ))}
               </div>
             )}
 
             {/* TECH STACK */}
-            {activeTab === 'techstack' && (
+            {activeTab === "techstack" && (
               <div className="min-h-[360px] flex justify-center">
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 max-w-5xl w-full">
                   {!loading &&
@@ -373,5 +333,5 @@ export default function PortfolioShowcase() {
         </AnimatePresence>
       </section>
     </>
-  )
+  );
 }

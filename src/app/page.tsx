@@ -14,6 +14,7 @@ import { hasPlayedIntro, setIntroPlayed } from "@/lib/introState";
 
 export default function Home() {
   const [showWelcome, setShowWelcome] = useState(true);
+  const [isMounted, setIsMounted] = useState(false); // 1. Add mounted state
 
   useEffect(() => {
     const currentHash = window.location.hash;
@@ -21,6 +22,7 @@ export default function Home() {
 
     if (currentHash === "#portfolio") {
       setShowWelcome(false);
+      setIsMounted(true); // Mark as mounted
       return;
     }
 
@@ -49,6 +51,7 @@ export default function Home() {
 
     if (!hasPlayedIntro()) {
       setShowWelcome(true);
+      setIsMounted(true); // Mark as mounted so the intro can play
 
       const timer = setTimeout(() => {
         setShowWelcome(false);
@@ -58,8 +61,26 @@ export default function Home() {
       return () => clearTimeout(timer);
     } else {
       setShowWelcome(false);
+      setIsMounted(true); // Mark as mounted with the intro skipped
     }
   }, []);
+
+  // 2. Prevent the hydration flash by rendering nothing until the effect runs
+  // Note: If you experience a brief white flash here on dark mode, you can change
+  // `return null` to `<div style={{ backgroundColor: "#000", minHeight: "100vh" }} />`
+
+  useEffect(() => {
+    if (isMounted && window.location.hash === "#portfolio") {
+      // Small timeout ensures the DOM has painted the sections
+      setTimeout(() => {
+        const portfolioSection = document.getElementById("portfolio");
+        if (portfolioSection) {
+          portfolioSection.scrollIntoView({ behavior: "instant" });
+        }
+      }, 50);
+    }
+  }, [isMounted]);
+  if (!isMounted) return null;
 
   return (
     <main style={{ position: "relative", overflow: "hidden" }}>

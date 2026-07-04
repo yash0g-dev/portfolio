@@ -1,20 +1,18 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import {
-  ArrowRight,
-  ArrowUpRight,
-} from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { motion } from "framer-motion";
+import { ArrowRight, ArrowUpRight, Link } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type Props = {
-  title: string
-  description: string
-  index: number
-  id?: string
-  image?: string
-  live_url?: string
-}
+  title: string;
+  description: string;
+  index: number;
+  id?: string;
+  image?: string;
+  live_url?: string;
+  github_url?: string;
+};
 
 export default function PortfolioCard({
   title,
@@ -23,8 +21,9 @@ export default function PortfolioCard({
   id,
   image,
   live_url,
+  github_url,
 }: Props) {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <motion.div
@@ -49,6 +48,7 @@ export default function PortfolioCard({
         {image ? (
           <img
             src={image}
+            alt={title}
             className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
           />
         ) : (
@@ -56,35 +56,46 @@ export default function PortfolioCard({
         )}
       </div>
 
-      <h3 className="text-[17px] font-semibold mb-2 leading-tight">
-        {title}
-      </h3>
+      <h3 className="text-[17px] font-semibold mb-2 leading-tight">{title}</h3>
 
       <p className="text-[13px] text-white/60 leading-relaxed line-clamp-2 min-h-[38px]">
         {description}
       </p>
 
       <div className="mt-auto pt-4 flex items-center justify-between">
-        {live_url ? (
-          <a
-            href={live_url}
-            target="_blank"
-            className="flex items-center gap-2 text-[13px] text-white/70 hover:text-white transition-all"
-          >
-            Live Demo
-            <ArrowUpRight size={14} />
-          </a>
-        ) : (
-          <div className="text-[13px] text-white/35">
-            No Link
-          </div>
-        )}
+        {/* Left Side: Live Demo & GitHub Links */}
+        <div className="flex items-center gap-4">
+          {live_url ? (
+            <a
+              href={live_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[13px] text-white/70 hover:text-white transition-all"
+            >
+              Live Demo
+              <ArrowUpRight size={14} />
+            </a>
+          ) : (
+            <div className="text-[13px] text-white/35">No Link</div>
+          )}
 
+          {github_url && (
+            <a
+              href={github_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/70 hover:text-white transition-all flex items-center"
+              aria-label="View source code on GitHub"
+            >
+              <Link size={14} />
+            </a>
+          )}
+        </div>
+
+        {/* Right Side: Details Button */}
         {id && (
           <button
-            onClick={() =>
-              router.push(`/portfolio/${id}`)
-            }
+            onClick={() => router.push(`/portfolio/${id}`)}
             className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition-all flex items-center gap-2 text-[13px]"
           >
             Details
@@ -93,5 +104,6 @@ export default function PortfolioCard({
         )}
       </div>
     </motion.div>
-  )
+  );
 }
+

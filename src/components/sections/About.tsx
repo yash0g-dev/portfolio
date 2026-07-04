@@ -30,7 +30,7 @@ const socialLinks = [
     title: "Email",
     user: "yashgupta",
     icon: FaEnvelope,
-    link: "mailto:yashg.dev03@gmail.com",
+    link: "mailto:yashgupta10094@gmail.com",
   },
   {
     title: "LeetCode",
@@ -343,7 +343,7 @@ export default function About() {
             >
               {/* DOWNLOAD CV */}
               <a
-                href="/Yash_Gupta_Resume.pdf"
+                href="/YashGuptaResume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ textDecoration: "none" }}

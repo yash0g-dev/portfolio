@@ -1,12 +1,10 @@
-// ====== PORTFOLIO DETAIL PAGE ======
-// src/app/portfolio/[id]/page.tsx
+"use client";
 
-'use client'
-
-import { useEffect, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
-import { supabase } from '@/lib/supabase'
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "@/lib/supabase";
+import { setIntroPlayed } from "@/lib/introState";
 import {
   ArrowLeft,
   ChevronLeft,
@@ -18,73 +16,73 @@ import {
   Layers,
   X,
   Box,
-} from 'lucide-react'
+} from "lucide-react";
 
 export default function PortfolioDetailPage() {
-  const { id } = useParams()
-  const router = useRouter()
+  const { id } = useParams();
+  const router = useRouter();
 
   const [project, setProject] = useState<any>({
-    title: '',
-    description: '',
-    technologies: '',
-    key_features: '',
-    image_url: '',
+    title: "",
+    description: "",
+    technologies: "",
+    key_features: "",
+    image_url: "",
     image_urls: [],
-    live_url: '',
-    github_url: '',
-  })
+    live_url: "",
+    github_url: "",
+  });
 
-  const [currentImage, setCurrentImage] = useState(0)
-  const [previewOpen, setPreviewOpen] = useState(false)
+  const [currentImage, setCurrentImage] = useState(0);
+  const [previewOpen, setPreviewOpen] = useState(false);
 
   useEffect(() => {
-    fetchProject()
-  }, [])
+    fetchProject();
+  }, []);
 
   const fetchProject = async () => {
     const { data } = await supabase
-      .from('projects')
-      .select('*')
-      .eq('id', id)
-      .single()
+      .from("projects")
+      .select("*")
+      .eq("id", id)
+      .single();
 
     if (data) {
-      setProject(data)
+      setProject(data);
     }
-  }
+  };
 
-  const tech = (project?.technologies || '')
-    .split(',')
-    .filter((t: string) => t.trim() !== '')
+  const tech = (project?.technologies || "")
+    .split(",")
+    .filter((t: string) => t.trim() !== "");
 
-  const features = (project?.key_features || '')
-    .split(',')
-    .filter((f: string) => f.trim() !== '')
+  const features = (project?.key_features || "")
+    .split(",")
+    .filter((f: string) => f.trim() !== "");
 
   const galleryImages =
     project?.image_urls && Array.isArray(project.image_urls)
       ? project.image_urls
       : project?.image_url
-      ? [project.image_url]
-      : []
+        ? [project.image_url]
+        : [];
 
   const nextImage = () => {
     if (currentImage < galleryImages.length - 1) {
-      setCurrentImage((prev) => prev + 1)
+      setCurrentImage((prev) => prev + 1);
     }
-  }
+  };
 
   const prevImage = () => {
     if (currentImage > 0) {
-      setCurrentImage((prev) => prev - 1)
+      setCurrentImage((prev) => prev - 1);
     }
-  }
+  };
 
   const handleBack = () => {
-    sessionStorage.setItem('skipIntroOnce', 'true')
-    router.push('/#portfolio')
-  }
+    setIntroPlayed();
+    router.push("/#portfolio");
+  };
 
   return (
     <>
@@ -240,9 +238,7 @@ export default function PortfolioDetailPage() {
 
                 <div>
                   <p className="text-base font-semibold">{tech.length}</p>
-                  <p className="text-[10px] text-white/40">
-                    Technologies Used
-                  </p>
+                  <p className="text-[10px] text-white/40">Technologies Used</p>
                 </div>
               </motion.div>
 
@@ -307,53 +303,51 @@ export default function PortfolioDetailPage() {
 
             {/* TECH */}
             {/* TECH */}
-<motion.div
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{
-    duration: 0.8,
-    delay: 0.08,
-    ease: [0.22, 1, 0.36, 1],
-  }}
->
-  <div className="flex items-center gap-2 mb-3">
-    <Code2 size={14} className="text-white/70" />
-    <p className="text-[13px] font-semibold">
-      Technologies Used
-    </p>
-  </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.08,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <Code2 size={14} className="text-white/70" />
+                <p className="text-[13px] font-semibold">Technologies Used</p>
+              </div>
 
-  <div className="flex flex-wrap gap-2">
-  {tech.map((t: string, i: number) => (
-    <motion.div
-  key={i}
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{
-    delay: 0.12 + i * 0.04,
-    duration: 0.5,
-    ease: [0.22, 1, 0.36, 1],
-  }}
-  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-br from-[#101010] to-[#181818] border border-white/10 text-[11px] text-white/75"
->
-  <Box size={11} className="text-white/40" />
-  {t.trim()}
-</motion.div>
-  ))}
-</div>
-</motion.div>
+              <div className="flex flex-wrap gap-2">
+                {tech.map((t: string, i: number) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      delay: 0.12 + i * 0.04,
+                      duration: 0.5,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gradient-to-br from-[#101010] to-[#181818] border border-white/10 text-[11px] text-white/75"
+                  >
+                    <Box size={11} className="text-white/40" />
+                    {t.trim()}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* RIGHT */}
-<motion.div
-  initial={{ opacity: 0, x: 80 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{
-    duration: 1,
-    ease: [0.22, 1, 0.36, 1],
-  }}
-  className="w-full pt-10 md:pt-14"
->
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{
+              duration: 1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="w-full pt-10 md:pt-14"
+          >
             {/* IMAGE */}
             {galleryImages.length > 0 && (
               <motion.div
@@ -419,8 +413,8 @@ export default function PortfolioDetailPage() {
                         onClick={() => setCurrentImage(i)}
                         className={`rounded-full transition-all duration-300 ${
                           currentImage === i
-                            ? 'w-6 h-1.5 bg-white'
-                            : 'w-1.5 h-1.5 bg-white/30'
+                            ? "w-6 h-1.5 bg-white"
+                            : "w-1.5 h-1.5 bg-white/30"
                         }`}
                       />
                     ))}
@@ -475,5 +469,6 @@ export default function PortfolioDetailPage() {
         </div>
       </motion.div>
     </>
-  )
+  );
 }
+
